@@ -17,6 +17,9 @@
 </template>
 
 <script>
+
+import { CREATE_LINK_MUTATION } from '../constants/graphql'
+
 export default {
   name: 'CreateLink',
   data () {
@@ -27,7 +30,15 @@ export default {
   },
   methods: {
     createLink () {
-      // ... stuff
+      const { description, url } = this.$data
+
+      this.$apollo.mutate({
+        mutation: CREATE_LINK_MUTATION,
+        variables: {
+          description,
+          url
+        }
+      })
     }
   }
 
