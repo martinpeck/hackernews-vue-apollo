@@ -23,7 +23,7 @@ export default {
     }
   },
   components: {
-    LinkItem
+    'link-item': LinkItem
   },
   apollo: {
     allLinks: {

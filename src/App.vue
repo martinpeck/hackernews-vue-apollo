@@ -1,12 +1,18 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <link-list></link-list>
   </div>
 </template>
 
 <script>
+
+import LinkList from './components/LinkList'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    'link-list': LinkList
+  }
 }
 </script>
 

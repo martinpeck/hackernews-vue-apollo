@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App'
-import router from './router'
 
 import { ApolloClient, createBatchingNetworkInterface } from 'apollo-client'
 import VueApollo from 'vue-apollo'
@@ -31,7 +30,6 @@ const apolloProvider = new VueApollo({
 new Vue({
   el: '#app',
   apolloProvider,
-  router,
   template: '<App/>',
   components: { App }
 })
