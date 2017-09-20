@@ -11,8 +11,8 @@
         v-model="url"
         type="text"
         placeholder="The URL for the link">
-      <button @click="createLink">Submit</button>
     </div>
+    <button @click="createLink">Submit</button>
   </div>
 </template>
 
