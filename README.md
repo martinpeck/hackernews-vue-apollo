@@ -1,6 +1,12 @@
-# hackernews-vue-apollo
+# Hackernews Vue Apollo
 
-> A Vue.js project
+> A Vue.js project that uses GraphQL, and the Graph.cool service
+
+This is a Hacker News web app, built by following the following **excellent** tutorial:
+
+https://www.howtographql.com/vue-apollo/0-introduction/
+
+The app uses the Apollo client for GraphQL, and the https://www.graph.cool/ service for its backend.
 
 ## Build Setup
 
@@ -22,6 +28,7 @@ npm run unit
 
 # run all tests
 npm test
-```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# build and deploy to surge.sh
+npm run deploy
+```
