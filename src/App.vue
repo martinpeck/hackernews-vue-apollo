@@ -1,20 +1,22 @@
 <template>
   <div id="app">
-    <link-list></link-list>
-    <create-link></create-link>
+    <div class="center w85">
+        <app-header></app-header>
+        <div class='ph3 pv1 background-gray'>
+          <router-view></router-view>
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
 
-import LinkList from './components/LinkList'
-import CreateLink from './components/CreateLink'
+import AppHeader from './components/AppHeader'
 
 export default {
   name: 'app',
   components: {
-    'link-list': LinkList,
-    'create-link': CreateLink
+    'app-header': AppHeader
   }
 }
 </script>
