@@ -13,7 +13,7 @@
 <script>
 
 import LinkItem from './LinkItem'
-import { ALL_LINKS_QUERY } from '../constants/graphql'
+import { ALL_LINKS_QUERY, NEW_LINKS_SUBSCRIPTION } from '../constants/graphql'
 
 export default {
   name: 'LinkList',
@@ -28,7 +28,25 @@ export default {
   },
   apollo: {
     allLinks: {
-      query: ALL_LINKS_QUERY
+      query: ALL_LINKS_QUERY,
+      subscribeToMore: [
+        {
+          document: NEW_LINKS_SUBSCRIPTION,
+          updateQuery: (previous, { subscriptionData }) => {
+            const newAllLinks = [
+              subscriptionData.data.Link.node,
+              ...previous.allLinks
+            ]
+
+            const result = {
+              ...previous,
+              allLinks: newAllLinks
+            }
+
+            return result
+          }
+        }
+      ]
     }
   }
 }
