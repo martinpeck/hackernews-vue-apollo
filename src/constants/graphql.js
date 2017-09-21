@@ -26,7 +26,8 @@ export const CREATE_LINK_MUTATION = gql`
 `
 
 export const CREATE_USER_MUTATION = gql`
-  mutation CreateUserMutation($name: String!, $email: String!, $password: $String!) {
+  mutation CreateUserMutation($name: String!, $email: String!, $password: String!) {
+
     createUser(
       name: $name,
       authProvider: {
@@ -48,10 +49,12 @@ export const CREATE_USER_MUTATION = gql`
         id
       }
     }
+
+  }
 `
 
 export const SIGNIN_USER_MUTATION = gql`
-  mutation SigninUserMutation(£email: String!, $password: String!) {
+  mutation SigninUserMutation($email: String!, $password: String!) {
     signinUser(email: {
       email: $email,
       password: $password

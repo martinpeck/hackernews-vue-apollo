@@ -32,7 +32,8 @@
 </template>
 
 <script>
-  import { GC_USER_ID, GC_AUTH_TOKEN } from '../constants/settings'
+  import { GC_USER_ID, GC_AUTH_TOKEN } from '@/constants/settings'
+  import { SIGNIN_USER_MUTATION, CREATE_USER_MUTATION } from '@/constants/graphql'
 
   export default {
     name: 'AppLogin',
@@ -46,7 +47,40 @@
     },
     methods: {
       confirm () {
-        // ... you'll implement this in a bit
+        const { name, email, password } = this.$data
+
+        if (this.login) {
+          this.$apollo.mutate({
+            mutation: SIGNIN_USER_MUTATION,
+            variables: {
+              email,
+              password
+            }
+          }).then((result) => {
+            const id = result.data.signinUser.user.id
+            const token = result.data.signinUser.token
+            console.log(result.data.signinUser)
+            this.saveUserData(id, token)
+          }).catch((error) => {
+            alert(error)
+          })
+        } else {
+          this.$apollo.mutate({
+            mutation: CREATE_USER_MUTATION,
+            variables: {
+              name,
+              email,
+              password
+            }
+          }).then((result) => {
+            const id = result.data.signinUser.id
+            const token = result.data.signinUser.token
+            this.saveUserData(id, token)
+          }).catch((error) => {
+            alert(error)
+          })
+        }
+        this.$router.push({ name: 'home' })
       },
       saveUserData (id, token) {
         localStorage.setItem(GC_USER_ID, id)
