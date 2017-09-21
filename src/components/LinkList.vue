@@ -13,7 +13,7 @@
 <script>
 
 import LinkItem from './LinkItem'
-import { ALL_LINKS_QUERY, NEW_LINKS_SUBSCRIPTION } from '../constants/graphql'
+import { ALL_LINKS_QUERY, NEW_LINKS_SUBSCRIPTION, NEW_VOTES_SUBSCRIPTION } from '../constants/graphql'
 
 export default {
   name: 'LinkList',
@@ -37,6 +37,23 @@ export default {
               subscriptionData.data.Link.node,
               ...previous.allLinks
             ]
+
+            const result = {
+              ...previous,
+              allLinks: newAllLinks
+            }
+
+            return result
+          }
+        },
+        {
+          document: NEW_VOTES_SUBSCRIPTION,
+          updateQuery: (previous, { subscriptionData }) => {
+            const votedLinkIndex = previous.allLinks.findIndex(link => link.id === subscriptionData.data.Vote.node.link.id)
+            const link = subscriptionData.data.Vote.node.link
+            const newAllLinks = previous.allLinks.slice()
+
+            newAllLinks[votedLinkIndex] = link
 
             const result = {
               ...previous,
