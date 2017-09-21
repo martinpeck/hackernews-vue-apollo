@@ -15,7 +15,7 @@
 
 <script>
   import { timeDifferenceForDate } from '@/utils'
-  import { CREATE_VOTE_MUTATION } from '@/constants/graphql'
+  import { CREATE_VOTE_MUTATION, ALL_LINKS_QUERY } from '@/constants/graphql'
   import { GC_USER_ID } from '@/constants/settings'
 
   export default {
@@ -50,8 +50,21 @@
           variables: {
             userId,
             linkId
+          },
+          update: (store, { data: { createVote } }) => {
+            this.updateStoreAfterVote(store, createVote, linkId)
           }
         })
+      },
+      updateStoreAfterVote (store, createVote, linkId) {
+        const data = store.readQuery({
+          query: ALL_LINKS_QUERY
+        })
+
+        const votedLink = data.allLinks.find(link => link.id === linkId)
+        votedLink.votes = createVote.link.votes
+
+        store.writeQuery({ query: ALL_LINKS_QUERY, data })
       }
     }
   }
