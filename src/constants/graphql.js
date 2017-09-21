@@ -36,12 +36,6 @@ export const CREATE_LINK_MUTATION = gql`
         id
         name
       }
-      votes {
-        id
-        user {
-          id
-        }
-      }
     }
   }
 `
