@@ -12,15 +12,20 @@ export const ALL_LINKS_QUERY = gql`
 `
 
 export const CREATE_LINK_MUTATION = gql`
-  mutation CreateLinkMutation($description: String!, $url: String!) {
+  mutation CreateLinkMutation($description: String!, $url: String!, $postedById: ID!) {
     createLink(
       description: $description,
       url: $url,
+      postedById: $postedById
     ) {
       id
       createdAt
       url
       description
+      postedBy {
+        id
+        name
+      }
     }
   }
 `
