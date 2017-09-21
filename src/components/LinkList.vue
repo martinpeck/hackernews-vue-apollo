@@ -110,7 +110,7 @@ export default {
 
             const result = {
               ...previous,
-              allLinks: newAllLinks
+              allLinks: newAllLinks.slice(0, 5)
             }
 
             return result
